@@ -16,9 +16,9 @@ import org.mcsg.worldgen.gen.noise.SimplexNoise;
 public class ColorHillsGenerator extends ChunkGenerator{
 
   private static SimplexNoise noise_h;
-  private static final int RAND_HILL_SIZE = 100;
-  private static final int BASE_HILL_SIZE = 100;
-  private static final double PERSISTANCE_MAX = 0.3;
+  private static final int RAND_HILL_SIZE = 500;
+  private static final int BASE_HILL_SIZE = 500;
+  private static final double PERSISTANCE_MAX = 0.7;
 
   private static HashMap<Integer, SimplexNoise> noise_map = new HashMap<>();
   private static Random rand = new Random();
@@ -49,10 +49,10 @@ public class ColorHillsGenerator extends ChunkGenerator{
     for(int x = 0; x < 16; x++){
       for(int z = 0; z < 16; z++){
         TreeMap<Integer, Integer> sort = new TreeMap<>();
-        int top = limit((int) (hmax * topd[x][z]), hmax, 10);
+        int top = limit((int) (hmax * topd[x][z]), hmax, 2);
 
         for(Entry<Integer, SimplexNoise> entry : noise_map.entrySet()){
-          int h = limit((int) (hmax * values.get(entry.getKey())[x][z]), hmax, 0);
+          int h = limit((int) (hmax * values.get(entry.getKey())[x][z]), hmax, 2);
           sort.put(h, entry.getKey());
         }
 
@@ -63,6 +63,7 @@ public class ColorHillsGenerator extends ChunkGenerator{
           }
           setBlock(result, x, y, z, (byte) cur);
         }
+        while(top <= 15){ setBlock(result, x, top, z, (byte) 9); top++;}
       }
     }
 
@@ -92,7 +93,7 @@ public class ColorHillsGenerator extends ChunkGenerator{
       for(int j=0;j<height;j++){
         int x=(int)(xStart+i*((endx-xStart)/width));
         int y=(int)(yStart+j*((endy-yStart)/height));
-        result[i][j]=0.5*(1+noise.getNoise(x,y));
+        result[i][j]=1*(noise.getNoise(x,y));
       }
     }
     return result;

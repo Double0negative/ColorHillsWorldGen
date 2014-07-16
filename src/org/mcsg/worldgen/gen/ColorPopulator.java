@@ -32,8 +32,10 @@ public class ColorPopulator extends BlockPopulator{
           Block block = chunk.getBlock(x, y, z);
           if(block.getTypeId() != 0){
             int[] temp = b_map.get(block.getTypeId());
-            block.setTypeId(temp[0]);
-            block.setData((byte) temp[1]);
+            if(temp != null && temp.length != 0 ){
+              block.setTypeId(temp[0]);
+              block.setData((byte) temp[1]);
+            }
           }
         }
       }
