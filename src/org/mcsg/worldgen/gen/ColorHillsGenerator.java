@@ -51,7 +51,7 @@ public class ColorHillsGenerator extends ChunkGenerator{
 					int h = limit((int) (hmax * values.get(entry.getKey())[x][z]), hmax, 0);
 					sort.put(h, entry.getKey());
 				}
-				
+
 				int cur = sort.firstEntry().getValue();
 				for(int y = 0; y < top; y++){
 					if(sort.containsKey(y)){
@@ -75,11 +75,11 @@ public class ColorHillsGenerator extends ChunkGenerator{
 		}
 		result[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = blkid;
 	}
-	
+
 	public static int limit (int val, int max, int min){
 		return (val > max) ? max : val < min ? min : val;
 	}
-	
+
 	public static double[][] createNoise(int width, int height, int xStart, int yStart, int endx, int endy, SimplexNoise noise){
 		double[][] result=new double[width][height];
 
