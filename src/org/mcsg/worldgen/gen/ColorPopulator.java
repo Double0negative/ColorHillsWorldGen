@@ -10,9 +10,18 @@ import org.bukkit.block.Block;
 import org.bukkit.generator.BlockPopulator;
 
 public class ColorPopulator extends BlockPopulator{
-
+  /*
+   *  Custom World gen by Double0negative. Source is free to use as you like, however
+   *  credit, whether in source for open source projects or somewhere on the map or 
+   *  description for closed source projects is appreciated. 
+   *
+   */
   private static final HashMap<Integer, int[]> b_map = new HashMap<>();
 
+  
+  /*
+   * Generate a map from the raw type to the colored Clay
+   */
   static {
     b_map.put(1, new int [] { Material.STAINED_CLAY.getId(),  1});
     b_map.put(2, new int [] { Material.STAINED_CLAY.getId(),  3});
@@ -31,7 +40,7 @@ public class ColorPopulator extends BlockPopulator{
         for(int z = 0; z < 16; z++){
           Block block = chunk.getBlock(x, y, z);
           if(block.getTypeId() != 0){
-            int[] temp = b_map.get(block.getTypeId());
+            int[] temp = b_map.get(block.getTypeId());  //loop thru each block in this chunk and set it to the appropriate type
             if(temp != null && temp.length != 0 ){
               block.setTypeId(temp[0]);
               block.setData((byte) temp[1]);
