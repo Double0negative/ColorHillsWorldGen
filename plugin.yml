@@ -1,0 +1,4 @@
+name: ColorGen
+main: org.mcsg.worldgen.DoubleGen
+load: startup
+version: 1
